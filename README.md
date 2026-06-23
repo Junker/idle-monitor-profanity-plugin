@@ -13,12 +13,12 @@ number of minutes.
 | `/idle-monitor on` | Enable idle monitoring (default) |
 | `/idle-monitor off` | Disable idle monitoring |
 | `/idle-monitor heuristic on\|off` | Toggle the Profanity-only idle source (default: off) |
-| `/idle-monitor minutes <N>` | Set idle threshold in minutes (default: 5, range 1-1440) |
+| `/idle-monitor timeout <N>` | Set idle threshold in minutes (default: 5, range 1-1440) |
 
 Tab-completion:
 
 ```
-/idle-monitor <Tab>            → status, on, off, heuristic, minutes
+/idle-monitor <Tab>            → status, on, off, heuristic, timeout
 /idle-monitor heuristic <Tab> → on, off
 ```
 
@@ -59,7 +59,7 @@ sources and, if the threshold is exceeded, switches to the console window.
 
 ```
 /idle-monitor                → show current settings and live idle time
-/idle-monitor minutes 10     → switch after 10 minutes of idle
+/idle-monitor timeout 10     → switch after 10 minutes of idle
 /idle-monitor heuristic on   → also use Profanity-only idle
 /idle-monitor off            → pause monitoring
 /idle-monitor on             → resume monitoring

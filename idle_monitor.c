@@ -258,7 +258,7 @@ static void cmd_handle_heuristic(char **args) {
     }
 }
 
-static void cmd_handle_minutes(char **args) {
+static void cmd_handle_timeout(char **args) {
     if (args && args[0]) {
         gchar *endptr = NULL;
         gint64 val = g_ascii_strtoll(args[0], &endptr, 10);
@@ -336,7 +336,7 @@ static const CmdDispatch cmd_dispatch[] = {
     { "on",        cmd_handle_enabled   },
     { "off",       cmd_handle_enabled   },
     { "heuristic", cmd_handle_heuristic },
-    { "minutes",   cmd_handle_minutes   },
+    { "timeout",   cmd_handle_timeout   },
     { NULL, NULL }
 };
 
@@ -419,7 +419,7 @@ void prof_init(G_GNUC_UNUSED const char *const version,
         "/idle-monitor on",
         "/idle-monitor off",
         "/idle-monitor heuristic on|off",
-        "/idle-monitor minutes <N>",
+        "/idle-monitor timeout <N>",
         NULL
     };
 
@@ -428,7 +428,7 @@ void prof_init(G_GNUC_UNUSED const char *const version,
         "By default Xorg idle time (last keyboard/mouse input) is used. "
         "A heuristic Profanity-only idle source — reset when you send "
         "messages, focus windows or type (chat-state) — can be enabled too. "
-        "The idle threshold is set with /idle-monitor minutes (default: 5). "
+        "The idle threshold is set with /idle-monitor timeout (default: 5). "
         "Monitoring is toggled with /idle-monitor on and /idle-monitor off. "
         "Use /idle-monitor status to see current settings and live idle.";
 
@@ -437,21 +437,21 @@ void prof_init(G_GNUC_UNUSED const char *const version,
         { "on",              "Enable idle monitoring (default)" },
         { "off",             "Disable idle monitoring" },
         { "heuristic on|off", "Toggle Profanity-only idle source (default: off)" },
-        { "minutes <N>",     "Idle threshold in minutes (default: 5, range 1-1440)" },
+        { "timeout <N>",     "Idle threshold in minutes (default: 5, range 1-1440)" },
         { NULL, NULL }
     };
 
     static char *examples[] = {
         "/idle-monitor",
         "/idle-monitor status",
-        "/idle-monitor minutes 10",
+        "/idle-monitor timeout 10",
         "/idle-monitor heuristic on",
         "/idle-monitor off",
         NULL
     };
     prof_register_command("/idle-monitor", 0, 2, synopsis, description, arguments, examples, idle_command_cb);
 
-    static char *subcmds[] = { "status", "on", "off", "heuristic", "minutes", NULL };
+    static char *subcmds[] = { "status", "on", "off", "heuristic", "timeout", NULL };
     prof_completer_add("/idle-monitor", subcmds);
     static char *on_off[] = { "on", "off", NULL };
     prof_completer_add("/idle-monitor heuristic", on_off);

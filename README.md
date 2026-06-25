@@ -1,8 +1,7 @@
 # idle_monitor Profanity plugin
 
 A [Profanity](https://profanity.im/) C plugin that switches to the console
-window when your **desktop** has been idle for longer than a configurable
-number of minutes.
+window when your **desktop** has been idle for longer than N minutes.
 
 ## Commands
 
@@ -25,8 +24,8 @@ Tab-completion:
 ## Building
 
 Requires GLib and libstrophe development headers. The X11 Screen Saver
-extension (`libxss`) is **optional**: if present, the Xorg idle source is built
-(`HAVE_LIBXSS`); if absent, the plugin builds in heuristic-only mode.
+extension (`libxss`) is **optional**: if present, the Xorg idle source is built; 
+if absent, the plugin builds in heuristic-only mode.
 
 ```bash
 make
@@ -79,7 +78,7 @@ Two idle sources are available and can run alongside each other:
 - **Xorg idle** (default) — time since the last keyboard or mouse input on the
   X server, read via the X11 Screen Saver extension (`libxss`). This works only
   on **Xorg**.
-- **Heuristic idle** — a Profanity-only timer that resets whenever you send a
+- **Heuristic idle** — a Profanity timer that resets whenever you send a
   message, focus a chat/room window, or emit an outgoing message stanza
   carrying a `<body>` or a typing (chat-state) notification. When built with
   `libxss` it also resets whenever the terminal running Profanity (detected via
